@@ -22,7 +22,7 @@ const subscriptionKey = '';
 
 const port = process.env.PORT || 3000
 
-app.get('/', (req, res) => (res.send('Your app is running on localhost:4200 - check it out there!')))
+app.get('/', (req, res) => (res.send('This is the port for receiving images. Your app is running on localhost:4200 - check it out there!')));
 
 app.post('/', (req, res) => {
   const { imageUrl } = req.body;
@@ -34,7 +34,7 @@ app.post('/', (req, res) => {
   const options = {
     url: uriBase,
     qs: params,
-    body: '{"url": ' + '"' + imageUrl + '"}',
+    body: '{"url": ' + imageUrl + '"}',
     headers: {
       'Content-Type': 'application/json',
       'Ocp-Apim-Subscription-Key' : subscriptionKey
@@ -58,6 +58,6 @@ app.post('/', (req, res) => {
       });
     }
   });
-})
+});
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Image processor listening on port ${port}!`));
