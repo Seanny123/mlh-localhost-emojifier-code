@@ -13,17 +13,15 @@ export class SafePipe {
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html'
 })
-
 export class AppComponent {
 	constructor(private http: HttpClient) {}
 
-  title = 'emojifier';
+  title = 'EMOJIFIER';
   uri = 'http://localhost:3000';
 	imageUrl = '';
-	htmlToAdd = ''
+	htmlToAdd = '';
 
 	sendFile(imageUrl) {
     this.imageUrl = '';
@@ -32,28 +30,16 @@ export class AppComponent {
       imageUrl: imageUrl,
     };
 
-		type FaceModel = {
-			faceRectangle: {
-				height: number,
-				width: number,
-				left: number,
-				top: number,
-			},
-			faceAttributes: {
-				emotion: object,
-			}
-		};
-
 		this.htmlToAdd = ''
-		this.http.post(`${this.uri}`, obj).subscribe((res:any) => {
+		this.http.post(`${this.uri}`, obj).subscribe((res: any) => {
       if (res.error) {
         this.htmlToAdd += `<span style="color: red;">${res.error.message}</span>`;
         return;
       }
-			res.forEach((face:FaceModel) => {
+			res.forEach((face) => {
 				const { faceRectangle, faceAttributes } = face;
 				const { height, width, left, top } = faceRectangle;
-				const style = `position:absolute; height:${height}px; width:${width}px; left:${left}px; top:${top}px;`
+				const style = `position:absolute; height:${height}px; width:${width}px; left:${left}px; top:${top}px;`;
 		    this.imageUrl = imageUrl;
 
 				const { emotion } = faceAttributes;
@@ -61,7 +47,7 @@ export class AppComponent {
 
 				Object.keys(emotion).forEach(key => {
 					if(!mainEmotion || emotion[key] > emotion[mainEmotion]) {
-						mainEmotion = key
+						mainEmotion = key;
 					}
 				});
 
