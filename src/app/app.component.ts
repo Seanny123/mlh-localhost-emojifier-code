@@ -40,7 +40,6 @@ export class AppComponent {
 			res.forEach((face) => {
 				const { faceRectangle, faceAttributes } = face;
 				const { height, width, left, top } = faceRectangle;
-				const style = `position:absolute; height:${height}px; width:${width}px; left:${left}px; top:${top}px;`
 		    this.imageUrl = imageUrl;
 
 				const { emotion } = faceAttributes;
@@ -52,7 +51,7 @@ export class AppComponent {
 					}
 				});
 
-				this.htmlToAdd += `<img class='emoji' style="${style}" src="/assets/${mainEmotion}.png"/>`;
+				// TODO: Use attributes to display the emotion
 			})
 		});
 	}
